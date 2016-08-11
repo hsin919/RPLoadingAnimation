@@ -54,7 +54,4 @@ class SpininngDot: RPLoadingAnimationDelegate {
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         replicatorLayer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
     }
-    
-    func changeDuration(duration: CFTimeInterval) {
-    }
 }
