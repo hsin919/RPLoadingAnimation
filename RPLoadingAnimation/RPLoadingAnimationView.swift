@@ -33,19 +33,30 @@ class AnimationFactory {
 }
 
 public class RPLoadingAnimationView: UIView {
-    private static let defaultType = RPLoadingAnimationType.RotatingCircle
-    private static let defaultColor = UIColor.blackColor()
-    private static let defaultSize = CGSize(width: 40, height: 40)
+    private static let defaultType = RPLoadingAnimationType.FunnyDotsA
+    private static let defaultColor = UIColor(red: 245/255, green: 166/255, blue: 35/255, alpha: 1.0)
+    private static let defaultSize = CGSize(width: 60, height: 60)
     
-    private var type: RPLoadingAnimationType
-    private var color: UIColor
-    private var size: CGSize
+    var type: RPLoadingAnimationType
+    var color: UIColor
+    var size: CGSize
+    
+    var isAnimating = false
+    var animation : RPLoadingAnimationDelegate?
     
     required public init?(coder aDecoder: NSCoder) {
         self.type = RPLoadingAnimationView.defaultType
         self.color = RPLoadingAnimationView.defaultColor
         self.size = RPLoadingAnimationView.defaultSize
         super.init(coder: aDecoder)
+    }
+    
+
+    convenience init () {
+        self.init(frame:CGRect.zero)
+        self.type = RPLoadingAnimationView.defaultType
+        self.color = RPLoadingAnimationView.defaultColor
+        self.size = RPLoadingAnimationView.defaultSize
     }
     
     init(frame: CGRect, type: RPLoadingAnimationType = defaultType, color: UIColor = defaultColor, size: CGSize = defaultSize) {
@@ -56,8 +67,27 @@ public class RPLoadingAnimationView: UIView {
     }
     
     func setupAnimation() {
-        let animation = AnimationFactory.animationForType(type)
+        animation = AnimationFactory.animationForType(type)
         layer.sublayers = nil
-        animation.setup(layer, size: size, color: color)
+        animation?.setup(layer, size: size, color: color)
+        isAnimating = true
+    }
+    
+    func pauseAnimation() {
+        animation?.pauseAnimation(layer)
+        isAnimating = false
+    }
+    
+    func resumeAnimation() {
+        animation?.resumeAnimation(layer)
+        isAnimating = true
+    }
+    
+    func toggleAnimationStatus() {
+        if(isAnimating) {
+            pauseAnimation()
+        } else {
+            resumeAnimation()
+        }
     }
 }

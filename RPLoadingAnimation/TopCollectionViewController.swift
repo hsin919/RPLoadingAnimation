@@ -17,6 +17,7 @@ class TopCollectionViewController: UICollectionViewController, UICollectionViewD
     private var cellWidth:CGFloat = 0.0
     private var cellHeight:CGFloat = 0.0
     
+    var animationList : [RPLoadingAnimationView] = []
     var animationTypes: [RPLoadingAnimationType] = [
         .RotatingCircle,
         .SpininngDot,
@@ -37,6 +38,11 @@ class TopCollectionViewController: UICollectionViewController, UICollectionViewD
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let animationView = animationList[indexPath.item]
+        animationView.toggleAnimationStatus()
     }
     
     // MARK: UICollectionViewDataSource
@@ -64,6 +70,7 @@ class TopCollectionViewController: UICollectionViewController, UICollectionViewD
         
         cell.addSubview(animationView)
         animationView.setupAnimation()
+        animationList.append(animationView)
         
         return cell
     }
