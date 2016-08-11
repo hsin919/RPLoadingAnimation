@@ -42,7 +42,8 @@ class TopCollectionViewController: UICollectionViewController, UICollectionViewD
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let animationView = animationList[indexPath.item]
-        animationView.toggleAnimationStatus()
+        //animationView.toggleAnimationStatus()
+        animationView.toggleSpeed()
     }
     
     // MARK: UICollectionViewDataSource

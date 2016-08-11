@@ -42,6 +42,7 @@ public class RPLoadingAnimationView: UIView {
     var size: CGSize
     
     var isAnimating = false
+    var isSpeedUp = false
     var animation : RPLoadingAnimationDelegate?
     
     required public init?(coder aDecoder: NSCoder) {
@@ -88,6 +89,24 @@ public class RPLoadingAnimationView: UIView {
             pauseAnimation()
         } else {
             resumeAnimation()
+        }
+    }
+    
+    func speedUpAnimation() {
+        animation?.speedUpAnimation(layer)
+        isSpeedUp = true
+    }
+    
+    func speedNormalAnimation() {
+        animation?.speedNormalAnimation(layer)
+        isSpeedUp = false
+    }
+    
+    func toggleSpeed() {
+        if(isSpeedUp) {
+            speedNormalAnimation()
+        } else {
+            speedUpAnimation()
         }
     }
 }

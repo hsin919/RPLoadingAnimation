@@ -10,7 +10,6 @@ import UIKit
 
 protocol RPLoadingAnimationDelegate: class {
     func setup(layer: CALayer, size: CGSize, color: UIColor)
-    
 }
 
 extension RPLoadingAnimationDelegate {
@@ -27,5 +26,17 @@ extension RPLoadingAnimationDelegate {
         layer.beginTime = 0.0
         let timeSincePause = layer.convertTime(CACurrentMediaTime(), fromLayer: nil) - pausedTime
         layer.beginTime = timeSincePause
+    }
+    
+    func speedUpAnimation(layer: CALayer) {
+        layer.timeOffset = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+        layer.beginTime = CACurrentMediaTime()
+        layer.speed = 2.0
+    }
+    
+    func speedNormalAnimation(layer: CALayer) {
+        layer.timeOffset = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+        layer.beginTime = CACurrentMediaTime()
+        layer.speed = 1.0
     }
 }

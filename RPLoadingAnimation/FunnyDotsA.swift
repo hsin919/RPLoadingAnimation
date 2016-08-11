@@ -16,7 +16,7 @@ class FunnyDotsA: RPLoadingAnimationDelegate {
         
         let dotNum: CGFloat = 7
         let diameter: CGFloat = size.width / 15
-        let duration: CFTimeInterval = 2.5
+        let duration: CFTimeInterval = 6
         
         let dot = CALayer()
         let frame = CGRect(
